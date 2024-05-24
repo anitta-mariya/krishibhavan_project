@@ -1,0 +1,218 @@
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.sql.*" %>
+<%@ page import="java.io.*" %>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%
+String id = request.getParameter("id");
+String driver = "com.mysql.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "krishibhavan";
+String userid = "root";
+String password = "";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+%>
+<html>
+
+
+<head>
+ 
+
+<meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <!-- Title -->
+  <title></title>
+  <!-- Favicon -->
+  <link rel="icon" href="img/core-img/favicon.ico">
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<header class="header-area">
+    <!-- Top Header Area -->
+    <div class="top-header-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="top-header-content d-flex align-items-center justify-content-between">
+              <!-- Top Header Content -->
+              <div class="top-header-meta">
+                <p>Welcome to <span>Krishibhavan Thekkumkara</span>, we hope you will enjoy our services and have good experience</p>
+              </div>
+              <!-- Top Header Content -->
+              <div class="top-header-meta text-right">
+                <a href="#" data-toggle="tooltip" data-placement="bottom" title="krishioffice@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: krishioffice@gmail.com</span></a>
+                <a href="#" data-toggle="tooltip" data-placement="bottom" title="+1 234 122 122"><i class="fa fa-phone" aria-hidden="true"></i> <span>Call Us: +84 223 9000</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ <!-- Navbar Area -->
+    <div class="famie-main-menu">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+          <!-- Menu -->
+          <nav class="classy-navbar justify-content-between" id="famieNav">
+            <!-- Nav Brand -->
+            <p><h1>Krishibhavan Thekkumkara</h1></p>
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+              <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+            <!-- Menu -->
+            <div class="classy-menu">
+              <!-- Close Button -->
+              <div class="classycloseIcon">
+                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+              </div>
+              <!-- Navbar Start -->
+              <div class="classynav">
+                <ul>
+                   <li class="active"><a href="slayout.html"><b>back</b></a></li>
+                
+					   
+                 </ul>
+                  
+                
+
+          <!-- Search Form -->
+          <div class="search-form">
+            <form action="#" method="get">
+              <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
+              <button type="submit" class="d-none"></button>
+            </form>
+            <!-- Close Icon -->
+            <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ##### Header Area End ##### -->
+  
+
+ <form class="form-inline" method="post" action="serqry_pmk.jsp">
+<input type="text" name="id" class="form-control" placeholder="Search roll no..">
+<button type="submit" name="save" class="btn btn-primary">Search</button></form>
+	
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+   <meta charset="utf-8">
+  <link rel="stylesheet" href="css/w3.css">
+  
+  
+  
+        
+	<div class="single-welcome-slides bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/.jpeg);">
+		
+    
+   
+        <div class="container" style="
+  margin-right: 168px;
+">
+			<br />
+			
+			
+                        
+			<br />
+			<br />
+		
+			<br />
+			<form method="post" id="user_form">
+				<h1 class="text-warning text-center"><font color="white">PM Kisan Registration View</font></h1>
+<table class="table table-striped table-hover table-bordered">
+<tr class="bg-dark text-white text-center">
+					
+						
+    <th>Id</th>
+							<th>Name</th>
+                                                        <th>Number</th>
+                                                        <th>Email</th>
+                                                        <th>Thaluk</th>
+                                                        <th>Panchayath</th>
+                                                        <th>Ration card no.</th>
+							<th>Aadhar card no.</th>
+                                                        <th>Account no.</th>
+                                                        <th>Status</th>
+							<th>varify</th>
+                                                        							<th>view</th>
+							<th>Reject</th>
+
+						</tr>
+                        
+
+
+
+<%
+try{
+connection = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=connection.createStatement();
+String sql ="select * from pmkisan_reg";
+resultSet = statement.executeQuery(sql);
+while(resultSet.next()){
+%>
+<tr>
+    
+
+<td><%=resultSet.getString("id") %></td>
+<td><%=resultSet.getString("name") %></td>
+<td><%=resultSet.getString("phonenum") %></td>
+<td><%=resultSet.getString("email") %></td>
+<td><%=resultSet.getString("thaluk") %></td>
+<td><%=resultSet.getString("panchayath") %></td>
+<td><%=resultSet.getString("rationnum") %></td>
+<td><%=resultSet.getString("aadharnum") %></td>
+<td><%=resultSet.getString("accountnum") %></td>
+<td><%=resultSet.getString("status") %></td>
+
+
+
+
+
+
+
+
+<td><a href="verify_pmk.jsp?id=<%=resultSet.getString("id") %>"><button type="button" class="delete">Verify</button></a></td>
+<td><a href="dele_pmk.jsp?id=<%=resultSet.getString("id") %>"><button type="button" class="delete">Delete</button></a></td>
+
+</tr>
+ <%
+}
+connection.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
+                                        </table>
+    
+				</div>
+				
+		
+        
+                                        <br>
+ </div>        
+                                        
+  </form>
+
+</body>
+</html>
+     
+  	
